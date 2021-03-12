@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import modelo.Persona;
@@ -15,6 +16,7 @@ public class Controlador implements ActionListener{
 
 	private VistaFormulario vista;
 	private ArrayList<Persona> personas = new ArrayList<>();
+	private int indice;
 
 	public Controlador(VistaFormulario vista) {
 		super();
@@ -61,24 +63,57 @@ public class Controlador implements ActionListener{
 			
 		} else if(comando.equals("Previous")) {
 			
-			
+			showPreviousUser();
 			
 		} else if(comando.equals("Next")) {
 			
-			
+			showNextUser();
 			
 		}
 		
 		
 	}
 
+	
+	private void showPreviousUser() {
+		
+		vista.getBtnNext().setEnabled(true);
+		vista.getBtnNew().setEnabled(true);
+		vista.getBtnAdd().setEnabled(false);
+		if(indice > 0) {
+			vista.getTxtFieldName().setText(personas.get(indice -1).getName());
+			indice --;
+		} else {
+			JOptionPane.showMessageDialog(null,"No hay más personas","Error",JOptionPane.ERROR_MESSAGE);
+		}
+		
+		
+		
+	}
+	
+	
+	private void showNextUser() {
+		
+		
+		if(indice < personas.size() -1) {
+			vista.getTxtFieldName().setText(personas.get(indice +1).getName());
+			indice ++;
+		} else {
+			JOptionPane.showMessageDialog(null,"No hay más personas","Error",JOptionPane.ERROR_MESSAGE);
+		}
+		
+		
+		
+	}
+	
+
 	private void addUser() {
 		
-		vista.getBtnNew().setEnabled(false);
+		
 		boolean rellenado = true;
 		for(Component c : vista.getPanelDatos().getComponents()) {
 			if(c instanceof JTextField) {
-				if(((JTextField)c).getText().isEmpty()){
+				if(((JTextField)c).getText().equals("")){
 					rellenado = false;
 				}
 				
@@ -88,23 +123,38 @@ public class Controlador implements ActionListener{
 			
 		}
 		
+		
+		
 		if(rellenado == false) {
-			System.out.println("Rellena todos los campos");
+			JOptionPane.showMessageDialog(null,"Rellena todos los campos","Aviso",JOptionPane.WARNING_MESSAGE);
 		} else {
-			personas.add(new Persona(vista.getTxtFieldName().getText(),vista.getTxtFieldSurname().getText(),vista.getTxtFieldAddress().getText(),
-					(String)vista.getComboBoxCity().getSelectedItem(),vista.getTxtFieldPhone().getText(),vista.getTxtFieldDni().getText(),
-					(Integer)vista.getComboBoxAge().getSelectedItem()));
+			if(vista.getRdbtnMen().isSelected()) {
+				personas.add(new Persona(vista.getTxtFieldName().getText(),vista.getTxtFieldSurname().getText(),vista.getTxtFieldAddress().getText(),
+						(String)vista.getComboBoxCity().getSelectedItem(),vista.getTxtFieldPhone().getText(),vista.getTxtFieldDni().getText(),
+						(Integer)vista.getComboBoxAge().getSelectedItem(),vista.getRdbtnMen().getText()));
+			} else {
+				personas.add(new Persona(vista.getTxtFieldName().getText(),vista.getTxtFieldSurname().getText(),vista.getTxtFieldAddress().getText(),
+						(String)vista.getComboBoxCity().getSelectedItem(),vista.getTxtFieldPhone().getText(),vista.getTxtFieldDni().getText(),
+						(Integer)vista.getComboBoxAge().getSelectedItem(),vista.getRdbtnWomen().getText()));
+			}
+			
 			vista.getBtnNew().setEnabled(true);
+			vista.getBtnAdd().setEnabled(false);
+			vista.getBtnPrevious().setEnabled(true);
+			indice ++;
 		}
+		
 		
 		
 	}
 
 	private void newUser() {
 		
+		indice = personas.size();
 		vista.getBtnAdd().setEnabled(true);
 		vista.getRdbtnMen().setEnabled(true);
 		vista.getRdbtnWomen().setEnabled(true);
+		vista.getBtnNew().setEnabled(false);
 		
 		for(Component c : vista.getPanelDatos().getComponents()) {
 			if(c instanceof JTextField) {

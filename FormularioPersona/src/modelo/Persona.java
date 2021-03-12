@@ -10,8 +10,9 @@ public class Persona {
 	private String Phone;
 	private String DNI;
 	private Integer Age;
+	private String sexo;
 	
-	public Persona(String name, String surname, String address, String city, String phone, String dNI, Integer age) {
+	public Persona(String name, String surname, String address, String city, String phone, String dNI, Integer age, String sexo) {
 		super();
 		this.name = name;
 		this.surname = surname;
@@ -20,6 +21,7 @@ public class Persona {
 		Phone = phone;
 		DNI = dNI;
 		Age = age;
+		this.sexo = sexo;
 	}
 
 	public String getName() {
@@ -53,8 +55,10 @@ public class Persona {
 	@Override
 	public String toString() {
 		return "Persona [name=" + name + ", surname=" + surname + ", Address=" + Address + ", City=" + City + ", Phone="
-				+ Phone + ", DNI=" + DNI + ", Age=" + Age + "]";
+				+ Phone + ", DNI=" + DNI + ", Age=" + Age + ", sexo=" + sexo + "]\n";
 	}
+
+
 	
 	
 	
