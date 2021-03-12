@@ -3,15 +3,18 @@ package es.ieslavereda.formulario.controlador;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
+import modelo.Persona;
 import vistas.VistaFormulario;
 
 public class Controlador implements ActionListener{
 
 	private VistaFormulario vista;
+	private ArrayList<Persona> personas = new ArrayList<>();
 
 	public Controlador(VistaFormulario vista) {
 		super();
@@ -71,6 +74,28 @@ public class Controlador implements ActionListener{
 
 	private void addUser() {
 		
+		vista.getBtnNew().setEnabled(false);
+		boolean rellenado = true;
+		for(Component c : vista.getPanelDatos().getComponents()) {
+			if(c instanceof JTextField) {
+				if(((JTextField)c).getText().isEmpty()){
+					rellenado = false;
+				}
+				
+			}
+		
+			
+			
+		}
+		
+		if(rellenado == false) {
+			System.out.println("Rellena todos los campos");
+		} else {
+			personas.add(new Persona(vista.getTxtFieldName().getText(),vista.getTxtFieldSurname().getText(),vista.getTxtFieldAddress().getText(),
+					(String)vista.getComboBoxCity().getSelectedItem(),vista.getTxtFieldPhone().getText(),vista.getTxtFieldDni().getText(),
+					(Integer)vista.getComboBoxAge().getSelectedItem()));
+			vista.getBtnNew().setEnabled(true);
+		}
 		
 		
 	}
