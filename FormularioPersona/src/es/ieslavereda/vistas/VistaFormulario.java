@@ -26,6 +26,7 @@ import java.util.Arrays;
 import java.util.Vector;
 
 import javax.swing.JButton;
+import com.github.lgooddatepicker.components.DatePicker;
 
 public class VistaFormulario extends JFrame {
 
@@ -40,7 +41,6 @@ public class VistaFormulario extends JFrame {
 	private JComboBox<String> comboBoxCity;
 	private JRadioButton rdbtnWomen;
 	private JRadioButton rdbtnMen;
-	private JComboBox<Integer> comboBoxAge;
 	private JButton btnAdd;
 	private JButton btnNew;
 	private JButton btnNext;
@@ -48,6 +48,9 @@ public class VistaFormulario extends JFrame {
 	private JPanel panelDatos;
 	private JMenuItem mntmSave;
 	private JMenuItem mntmOpen;
+	private DatePicker datePicker;
+	private JMenu mnVer;
+	private JMenuItem mntmTabla;
 	
 
 
@@ -75,7 +78,7 @@ public class VistaFormulario extends JFrame {
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 371);
+		setBounds(100, 100, 592, 371);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -97,6 +100,12 @@ public class VistaFormulario extends JFrame {
 		
 		JMenuItem mntmExit = new JMenuItem("Exit");
 		mnNewMenu.add(mntmExit);
+		
+		mnVer = new JMenu("Ver");
+		menuBar.add(mnVer);
+		
+		mntmTabla = new JMenuItem("Tabla");
+		mnVer.add(mntmTabla);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -161,7 +170,7 @@ public class VistaFormulario extends JFrame {
 		btnNew = new JButton("New");
 		panel.add(btnNew);
 		panelBotones.setLayout(gl_panelBotones);
-		panelDatos.setLayout(new MigLayout("", "[86.00][169.00,grow][][]", "[20.00][23.00][24.00][26.00][28.00][25.00][28.00]"));
+		panelDatos.setLayout(new MigLayout("", "[86.00][116.00][][75.00]", "[20.00][23.00][24.00][26.00][28.00][25.00][28.00]"));
 		
 		JLabel lblName = new JLabel("Name");
 		panelDatos.add(lblName, "cell 0 1");
@@ -206,10 +215,9 @@ public class VistaFormulario extends JFrame {
 		JLabel lblYears = new JLabel("Years");
 		panelDatos.add(lblYears, "cell 2 5,alignx trailing");
 		
-		comboBoxAge = new JComboBox<Integer>();
-		comboBoxAge.setEnabled(false);
-		comboBoxAge.setModel(dim);
-		panelDatos.add(comboBoxAge, "cell 3 5,growx");
+		datePicker = new DatePicker();
+		datePicker.getComponentDateTextField().setEditable(false);
+		panelDatos.add(datePicker, "cell 3 5,grow");
 		
 		JLabel lblPhone = new JLabel("Phone");
 		panelDatos.add(lblPhone, "cell 0 6");
@@ -360,14 +368,12 @@ public class VistaFormulario extends JFrame {
 
 
 
-	public JComboBox<Integer> getComboBoxAge() {
-		return comboBoxAge;
-	}
+	
 
 
 
-	public void setComboBoxAge(JComboBox<Integer> comboBoxAge) {
-		this.comboBoxAge = comboBoxAge;
+	public DatePicker getDatePicker() {
+		return datePicker;
 	}
 
 
@@ -442,8 +448,12 @@ public class VistaFormulario extends JFrame {
 		return mntmOpen;
 	}
 
-	
-	
 
 
+	public JMenuItem getMntmTabla() {
+		return mntmTabla;
+	}
+	
+	
+	
 }

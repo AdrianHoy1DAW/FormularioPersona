@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 import javax.swing.filechooser.FileFilter;
 
 import es.ieslavereda.modelo.Persona;
+import es.ieslavereda.vistas.Tabla;
 import es.ieslavereda.vistas.VistaFormulario;
 
 public class Controlador implements ActionListener{
@@ -44,6 +45,7 @@ public class Controlador implements ActionListener{
 		vista.getBtnNew().addActionListener(this);
 		vista.getMntmSave().addActionListener(this);
 		vista.getMntmOpen().addActionListener(this);
+		vista.getMntmTabla().addActionListener(this);
 		
 		
 		// Add Action Command
@@ -53,6 +55,7 @@ public class Controlador implements ActionListener{
 		vista.getBtnNew().setActionCommand("New");
 		vista.getMntmOpen().setActionCommand("Open");
 		vista.getMntmSave().setActionCommand("Save");
+		vista.getMntmTabla().setActionCommand("Tabla");
 		
 		
 	}
@@ -91,12 +94,23 @@ public class Controlador implements ActionListener{
 			
 			save();
 			
+		} else if(comando.equals("Tabla")) {
+			
+			tabla();
+			
 		}
 		
 		
 	}
 
 	
+	private void tabla() {
+		
+		Tabla t = new Tabla();
+		t.setVisible(true);
+		
+	}
+
 	private void open() {
 		
 		JFileChooser jfc = new JFileChooser();
@@ -189,7 +203,7 @@ public class Controlador implements ActionListener{
 		vista.getComboBoxCity().setSelectedItem(personas.get(indice + num).getCity());
 		vista.getTxtFieldPhone().setText(personas.get(indice + num).getPhone());
 		vista.getTxtFieldDni().setText(personas.get(indice + num).getDNI());
-		vista.getComboBoxAge().setSelectedItem(personas.get(indice + num).getAge());
+		vista.getDatePicker().setDate(personas.get(indice + num).getAge());
 		vista.getRdbtnMen().setSelected(personas.get(indice + num).getSexo().equals("Men"));
 		vista.getRdbtnWomen().setSelected(personas.get(indice + num).getSexo().equals("Women"));
 	}
@@ -213,6 +227,8 @@ public class Controlador implements ActionListener{
 	private void addUser() {
 		
 		
+		
+		
 		boolean rellenado = true;
 		for(Component c : vista.getPanelDatos().getComponents()) {
 			if(c instanceof JTextField) {
@@ -234,11 +250,11 @@ public class Controlador implements ActionListener{
 			if(vista.getRdbtnMen().isSelected()) {
 				personas.add(new Persona(vista.getTxtFieldName().getText(),vista.getTxtFieldSurname().getText(),vista.getTxtFieldAddress().getText(),
 						(String)vista.getComboBoxCity().getSelectedItem(),vista.getTxtFieldPhone().getText(),vista.getTxtFieldDni().getText(),
-						(Integer)vista.getComboBoxAge().getSelectedItem(),vista.getRdbtnMen().getText()));
+						vista.getDatePicker().getDate(),vista.getRdbtnMen().getText()));
 			} else {
 				personas.add(new Persona(vista.getTxtFieldName().getText(),vista.getTxtFieldSurname().getText(),vista.getTxtFieldAddress().getText(),
 						(String)vista.getComboBoxCity().getSelectedItem(),vista.getTxtFieldPhone().getText(),vista.getTxtFieldDni().getText(),
-						(Integer)vista.getComboBoxAge().getSelectedItem(),vista.getRdbtnWomen().getText()));
+						vista.getDatePicker().getDate(),vista.getRdbtnWomen().getText()));
 			}
 			
 			vista.getBtnNew().setEnabled(true);

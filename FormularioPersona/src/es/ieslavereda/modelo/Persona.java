@@ -1,28 +1,29 @@
 package es.ieslavereda.modelo;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 public class Persona implements Serializable{
 
 	
 	private String name;
 	private String surname;
-	private String Address;
-	private String City;
+	private String address;
+	private String city;
 	private String Phone;
 	private String DNI;
-	private Integer Age;
+	private LocalDate birthday;
 	private String sexo;
 	
-	public Persona(String name, String surname, String address, String city, String phone, String dNI, Integer age, String sexo) {
+	public Persona(String name, String surname, String address, String city, String phone, String dNI, LocalDate age, String sexo) {
 		super();
 		this.name = name;
 		this.surname = surname;
-		Address = address;
-		City = city;
+		this.address = address;
+		this.city = city;
 		Phone = phone;
 		DNI = dNI;
-		Age = age;
+		birthday = age;
 		this.sexo = sexo;
 	}
 
@@ -35,11 +36,11 @@ public class Persona implements Serializable{
 	}
 
 	public String getAddress() {
-		return Address;
+		return address;
 	}
 
 	public String getCity() {
-		return City;
+		return city;
 	}
 
 	public String getPhone() {
@@ -50,8 +51,8 @@ public class Persona implements Serializable{
 		return DNI;
 	}
 
-	public Integer getAge() {
-		return Age;
+	public LocalDate getAge() {
+		return birthday;
 	}
 	
 	public String getSexo() {
@@ -60,8 +61,8 @@ public class Persona implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Persona [name=" + name + ", surname=" + surname + ", Address=" + Address + ", City=" + City + ", Phone="
-				+ Phone + ", DNI=" + DNI + ", Age=" + Age + ", sexo=" + sexo + "]\n";
+		return "Persona [name=" + name + ", surname=" + surname + ", Address=" + address + ", City=" + city + ", Phone="
+				+ Phone + ", DNI=" + DNI + ", Birthday=" + birthday + ", sexo=" + sexo + "]\n";
 	}
 
 
