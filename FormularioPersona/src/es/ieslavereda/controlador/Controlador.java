@@ -1,4 +1,4 @@
-package es.ieslavereda.formulario.controlador;
+package es.ieslavereda.controlador;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
