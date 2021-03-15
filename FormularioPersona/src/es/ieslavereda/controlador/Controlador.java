@@ -18,8 +18,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileFilter;
 
-import modelo.Persona;
-import vistas.VistaFormulario;
+import es.ieslavereda.modelo.Persona;
+import es.ieslavereda.vistas.VistaFormulario;
 
 public class Controlador implements ActionListener{
 

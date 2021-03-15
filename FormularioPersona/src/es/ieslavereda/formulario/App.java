@@ -3,7 +3,7 @@ package es.ieslavereda.formulario;
 import java.awt.EventQueue;
 
 import es.ieslavereda.controlador.Controlador;
-import vistas.VistaFormulario;
+import es.ieslavereda.vistas.VistaFormulario;
 
 public class App {
 

@@ -1,4 +1,4 @@
-package modelo;
+package es.ieslavereda.modelo;
 
 import java.io.Serializable;
 

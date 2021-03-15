@@ -1,4 +1,4 @@
-package vistas;
+package es.ieslavereda.vistas;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
