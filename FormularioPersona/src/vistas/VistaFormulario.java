@@ -46,6 +46,8 @@ public class VistaFormulario extends JFrame {
 	private JButton btnNext;
 	private JButton btnPrevious;
 	private JPanel panelDatos;
+	private JMenuItem mntmSave;
+	private JMenuItem mntmOpen;
 	
 
 
@@ -81,21 +83,20 @@ public class VistaFormulario extends JFrame {
 		JMenu mnNewMenu = new JMenu("FIle");
 		menuBar.add(mnNewMenu);
 		
-		JMenuItem mntmExit = new JMenuItem("Open");
-		mnNewMenu.add(mntmExit);
+		mntmOpen = new JMenuItem("Open");
+		mnNewMenu.add(mntmOpen);
 		
 		JSeparator separator_1 = new JSeparator();
 		mnNewMenu.add(separator_1);
 		
-		JMenuItem mntmSave = new JMenuItem("Save");
-		mntmSave.setEnabled(false);
+		mntmSave = new JMenuItem("Save");
 		mnNewMenu.add(mntmSave);
 		
 		JSeparator separator = new JSeparator();
 		mnNewMenu.add(separator);
 		
-		JMenuItem mntmOpen = new JMenuItem("Exit");
-		mnNewMenu.add(mntmOpen);
+		JMenuItem mntmExit = new JMenuItem("Exit");
+		mnNewMenu.add(mntmExit);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -429,6 +430,19 @@ public class VistaFormulario extends JFrame {
 		this.panelDatos = panelDatos;
 	}
 
+
+
+	public JMenuItem getMntmSave() {
+		return mntmSave;
+	}
+
+
+
+	public JMenuItem getMntmOpen() {
+		return mntmOpen;
+	}
+
+	
 	
 
 

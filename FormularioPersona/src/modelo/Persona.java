@@ -1,6 +1,8 @@
 package modelo;
 
-public class Persona {
+import java.io.Serializable;
+
+public class Persona implements Serializable{
 
 	
 	private String name;
@@ -50,6 +52,10 @@ public class Persona {
 
 	public Integer getAge() {
 		return Age;
+	}
+	
+	public String getSexo() {
+		return sexo;
 	}
 
 	@Override
