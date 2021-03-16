@@ -12,18 +12,21 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import java.awt.FlowLayout;
+import javax.swing.JButton;
 
-public class Tabla extends JFrame {
+public class VistaTabla extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-
+	private DefaultTableModel dtm;
+	private JButton btnDelete;
 
 	/**
 	 * Create the frame.
 	 */
-	public Tabla() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public VistaTabla() {
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -51,18 +54,21 @@ public class Tabla extends JFrame {
 					.addComponent(panelBotones, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
+		panelBotones.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
+		
+		btnDelete = new JButton("Delete");
+		panelBotones.add(btnDelete);
 		panelTabla.setLayout(new BorderLayout(0, 0));
 		
 		JScrollPane scrollPane = new JScrollPane();
 		panelTabla.add(scrollPane, BorderLayout.CENTER);
 		
 		table = new JTable();
-		DefaultTableModel dtm = new DefaultTableModel();
+		dtm = new DefaultTableModel();
 		dtm.addColumn("id");
 		dtm.addColumn("DNI");
 		dtm.addColumn("Nombre");
 		dtm.addColumn("Apellidos");
-		
 		table.setModel(dtm);
 		
 		
@@ -70,5 +76,23 @@ public class Tabla extends JFrame {
 		
 		scrollPane.setViewportView(table);
 		contentPane.setLayout(gl_contentPane);
+		
+		
 	}
+
+	public DefaultTableModel getDtm() {
+		return dtm;
+	}
+
+	public JButton getBtnDelete() {
+		return btnDelete;
+	}
+
+	public JTable getTable() {
+		return table;
+	}
+	
+	
+	
+	
 }

@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -19,12 +20,14 @@ import javax.swing.JTextField;
 import javax.swing.filechooser.FileFilter;
 
 import es.ieslavereda.modelo.Persona;
-import es.ieslavereda.vistas.Tabla;
+import es.ieslavereda.vistas.VistaTabla;
 import es.ieslavereda.vistas.VistaFormulario;
 
 public class Controlador implements ActionListener{
 
 	private VistaFormulario vista;
+	private VistaTabla tabla;
+	
 	private ArrayList<Persona> personas = new ArrayList<>();
 	private int indice;
 
@@ -46,6 +49,8 @@ public class Controlador implements ActionListener{
 		vista.getMntmSave().addActionListener(this);
 		vista.getMntmOpen().addActionListener(this);
 		vista.getMntmTabla().addActionListener(this);
+		
+		
 		
 		
 		// Add Action Command
@@ -98,16 +103,52 @@ public class Controlador implements ActionListener{
 			
 			tabla();
 			
+		} else if(comando.equals("Delete")) {
+			
+			deleteRow();
+			
 		}
 		
 		
 	}
 
 	
+	private void deleteRow() {
+		
+		int fila = tabla.getTable().getSelectedRow();
+		if(fila == -1) {
+			
+			JOptionPane.showMessageDialog(tabla, "Debes seleccionar una fila","Error",JOptionPane.ERROR_MESSAGE);
+			
+		} else {
+			
+			int option = JOptionPane.showConfirmDialog(tabla, "Esta seguro de elminar la fila selecionada?", "Confirmar", JOptionPane.YES_NO_OPTION);
+			
+			if(option == JOptionPane.YES_OPTION) {
+				tabla.getDtm().removeRow(fila);
+				personas.remove(fila);
+				indice = personas.size();
+			}
+		}
+		
+	}
+
 	private void tabla() {
 		
-		Tabla t = new Tabla();
-		t.setVisible(true);
+		tabla = new VistaTabla();
+		
+		tabla.setVisible(true);
+		
+		tabla.getBtnDelete().addActionListener(this);
+		tabla.getBtnDelete().setActionCommand("Delete");
+		
+		int i = 0;
+		Collections.sort(personas,(p1,p2)->p1.getName().compareTo(p2.getName()));
+		for(Persona p: personas) {
+			tabla.getDtm().addRow(new String[] {String.valueOf(i),p.getDNI(),p.getName(),p.getSurname()});
+			i++;
+			
+		}
 		
 	}
 
